@@ -17,6 +17,13 @@ public class StudentProfile extends User {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
+    public StudentProfile(){}
+
+    public StudentProfile(String photo, String year, Department department) {
+        this.photo = photo;
+        this.year = year;
+        this.department = department;
+    }
 
     public Long getUser_id() {
         return user_id;

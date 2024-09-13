@@ -18,7 +18,14 @@ public class Course {
     @JoinColumn(name = "faculty_id", nullable = false)
     private FacultyProfile facultyProfile;
 
-    // Getters and Setters
+    public Course(String title, String description, Department department, FacultyProfile facultyProfile) {
+        this.title = title;
+        this.description = description;
+        this.department = department;
+        this.facultyProfile = facultyProfile;
+    }
+
+    public Course(){}
 
     public Long getId() {
         return id;

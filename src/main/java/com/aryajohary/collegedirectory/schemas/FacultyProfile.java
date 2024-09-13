@@ -16,6 +16,14 @@ public class FacultyProfile extends User{
 
     private String officeHours;
 
+    public FacultyProfile(){}
+
+    public FacultyProfile(String photo, Department department, String officeHours) {
+        this.photo = photo;
+        this.department = department;
+        this.officeHours = officeHours;
+    }
+
     @Override
     public Long getId() {
         return id;

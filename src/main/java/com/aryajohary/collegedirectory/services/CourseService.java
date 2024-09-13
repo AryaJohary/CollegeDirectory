@@ -9,8 +9,13 @@ import java.util.List;
 
 @Service
 public class CourseService {
-    @Autowired
+
     private CourseRepository courseRepository;
+
+    @Autowired
+    public CourseService(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
 
     public Course save(Course course) {
         return courseRepository.save(course);

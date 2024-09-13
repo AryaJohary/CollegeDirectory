@@ -27,6 +27,21 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private Set<Course> courses;
 
+    public Department(){}
+
+    public Department(String name, String description,
+                      Set<StudentProfile> students,
+                      Set<FacultyProfile> facultyMembers,
+                      Set<AdministratorProfile> administrators,
+                      Set<Course> courses) {
+        this.name = name;
+        this.description = description;
+        this.students = students;
+        this.facultyMembers = facultyMembers;
+        this.administrators = administrators;
+        this.courses = courses;
+    }
+
     public Long getId() {
         return id;
     }

@@ -22,7 +22,23 @@ public class User {
     @JoinColumn(name = "studentprofile_id")
     private StudentProfile studentProfile;
 
-    // Getters and Setters
+    public User(){}
+
+    public User(String username,
+                String password,
+                Role role,
+                String name,
+                String email,
+                String phone,
+                StudentProfile studentProfile) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.studentProfile = studentProfile;
+    }
 
     public Long getId() {
         return id;

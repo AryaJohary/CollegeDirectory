@@ -9,8 +9,13 @@ import java.util.List;
 
 @Service
 public class StudentProfileService {
-    @Autowired
+
     private StudentProfileRepository studentProfileRepository;
+
+    @Autowired
+    public StudentProfileService(StudentProfileRepository studentProfileRepository) {
+        this.studentProfileRepository = studentProfileRepository;
+    }
 
     public StudentProfile save(StudentProfile studentProfile) {
         return studentProfileRepository.save(studentProfile);

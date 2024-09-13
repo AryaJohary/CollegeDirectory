@@ -17,6 +17,12 @@ public class Enrollment {
     @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
     private Course course;
 
+    public Enrollment(){}
+
+    public Enrollment(StudentProfile studentProfile, Course course) {
+        this.studentProfile = studentProfile;
+        this.course = course;
+    }
 
     public Long getId() {
         return id;

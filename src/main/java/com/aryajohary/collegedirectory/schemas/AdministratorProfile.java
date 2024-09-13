@@ -14,6 +14,13 @@ public class AdministratorProfile extends User{
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
+    public AdministratorProfile(){}
+
+    public AdministratorProfile(String photo, Department department) {
+        this.photo = photo;
+        this.department = department;
+    }
+
     @Override
     public Long getId() {
         return id;
