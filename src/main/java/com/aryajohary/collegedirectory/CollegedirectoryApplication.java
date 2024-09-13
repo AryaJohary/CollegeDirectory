@@ -12,14 +12,4 @@ public class CollegedirectoryApplication {
 		SpringApplication.run(CollegedirectoryApplication.class, args);
 	}
 
-
-	@Bean
-	public CommandLineRunner commandLineRunner(){
-		return runner -> createUsers();
-	}
-
-	private void createUsers() {
-		
-	}
-
 }

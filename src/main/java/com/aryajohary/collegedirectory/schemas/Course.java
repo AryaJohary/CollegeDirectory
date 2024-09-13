@@ -3,6 +3,7 @@ package com.aryajohary.collegedirectory.schemas;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "course")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

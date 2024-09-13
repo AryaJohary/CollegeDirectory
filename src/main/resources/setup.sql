@@ -1,7 +1,7 @@
 -- Enum for Role
 CREATE TYPE Role AS ENUM ('STUDENT', 'FACULTY_MEMBER', 'ADMINISTRATOR');
--- User Table
-CREATE TABLE User (
+-- "user" Table
+CREATE TABLE "user" (
                       id SERIAL PRIMARY KEY,
                       username VARCHAR(50) UNIQUE NOT NULL,
                       password VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE StudentProfile (
                                 photo VARCHAR(255),
                                 department_id INTEGER NOT NULL,
                                 year VARCHAR(50),
-                                FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+                                FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE,
                                 FOREIGN KEY (department_id) REFERENCES Department(id) ON DELETE CASCADE
 );
 -- FacultyProfile Table
@@ -31,7 +31,7 @@ CREATE TABLE FacultyProfile (
                                 photo VARCHAR(255),
                                 department_id INTEGER NOT NULL,
                                 office_hours VARCHAR(255),
-                                FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+                                FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE,
                                 FOREIGN KEY (department_id) REFERENCES Department(id) ON DELETE CASCADE
 );
 
@@ -40,7 +40,7 @@ CREATE TABLE AdministratorProfile (
                                       user_id INTEGER PRIMARY KEY,
                                       photo VARCHAR(255),
                                       department_id INTEGER NOT NULL,
-                                      FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+                                      FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE,
                                       FOREIGN KEY (department_id) REFERENCES Department(id) ON DELETE CASCADE
 );
 -- Course Table
