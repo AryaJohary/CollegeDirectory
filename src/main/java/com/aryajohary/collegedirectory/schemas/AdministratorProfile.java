@@ -3,29 +3,25 @@ package com.aryajohary.collegedirectory.schemas;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "AdministratorProfile")
-public class AdministratorProfile {
+public class AdministratorProfile extends User{
     @Id
-    private Long userId;
+    @Column(name = "user_id")
+    private Long id;
+
     private String photo;
 
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    // Getters and Setters
-
-    public Long getUserId() {
-        return userId;
+    @Override
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getPhoto() {
@@ -42,13 +38,5 @@ public class AdministratorProfile {
 
     public void setDepartment(Department department) {
         this.department = department;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

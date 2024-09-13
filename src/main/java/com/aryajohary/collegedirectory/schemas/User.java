@@ -4,7 +4,7 @@ package com.aryajohary.collegedirectory.schemas;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,11 @@ public class User {
     private String name;
     private String email;
     private String phone;
+
+
+    @ManyToOne
+    @JoinColumn(name = "studentprofile_id")
+    private StudentProfile studentProfile;
 
     // Getters and Setters
 

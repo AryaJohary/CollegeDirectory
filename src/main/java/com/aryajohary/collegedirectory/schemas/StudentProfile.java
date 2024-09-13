@@ -3,10 +3,13 @@ package com.aryajohary.collegedirectory.schemas;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "StudentProfile")
-public class StudentProfile {
+public class StudentProfile extends User {
+
+
     @Id
-    private Long userId;
+    @Column(name = "user_id")
+    private Long user_id;
+
     private String photo;
     private String year;
 
@@ -14,19 +17,13 @@ public class StudentProfile {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    // Getters and Setters
-
-    public Long getUserId() {
-        return userId;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getPhoto() {
@@ -51,13 +48,5 @@ public class StudentProfile {
 
     public void setDepartment(Department department) {
         this.department = department;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
