@@ -3,10 +3,11 @@ package com.aryajohary.collegedirectory.schemas;
 
 import jakarta.persistence.*;
 
+//
+//@MappedSuperclass
 @Entity
-@Table(name = "user")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,10 +20,6 @@ public class User {
     private String phone;
 
 
-    @ManyToOne
-    @JoinColumn(name = "studentprofile_id")
-    private StudentProfile studentProfile;
-
     public User(){}
 
     public User(String username,
@@ -30,15 +27,13 @@ public class User {
                 Role role,
                 String name,
                 String email,
-                String phone,
-                StudentProfile studentProfile) {
+                String phone) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.studentProfile = studentProfile;
     }
 
     public Long getId() {

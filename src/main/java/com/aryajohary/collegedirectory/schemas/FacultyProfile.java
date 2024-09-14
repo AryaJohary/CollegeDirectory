@@ -3,10 +3,10 @@ package com.aryajohary.collegedirectory.schemas;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "facultyprofile")
+@PrimaryKeyJoinColumn(name = "user_id")
 public class FacultyProfile extends User{
-    @Id
-    @Column(name = "user_id")
-    private Long id;
+
 
     private String photo;
 
@@ -24,15 +24,7 @@ public class FacultyProfile extends User{
         this.officeHours = officeHours;
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getPhoto() {
         return photo;
