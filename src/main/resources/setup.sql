@@ -1,3 +1,7 @@
+-- We don't actually need to query this whole table
+-- I have setup the Spring Boot to create and drop the table
+-- at the start of
+
 -- Enum for Role
 CREATE TYPE Role AS ENUM ('STUDENT', 'FACULTY_MEMBER', 'ADMINISTRATOR');
 -- "user" Table

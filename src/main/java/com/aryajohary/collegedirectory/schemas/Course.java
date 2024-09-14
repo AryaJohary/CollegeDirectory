@@ -11,9 +11,14 @@ public class Course {
     private String title;
     private String description;
 
+    // many courses can belong to a single department
+
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
+
+    // many courses can belong to a single faculty
+    // in other words, one faculty can teach multiple courses
 
     @ManyToOne
     @JoinColumn(name = "faculty_id", nullable = false)

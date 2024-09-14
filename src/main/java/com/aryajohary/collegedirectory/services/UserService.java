@@ -34,6 +34,9 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    // this method was created to search the database for the
+    // User based upon username. it will be used in UserPrincipal later
+
     public User findByUserName(String userName) {
         return userRepository.findByUsername(userName).orElse(null);
     }

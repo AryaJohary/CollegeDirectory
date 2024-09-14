@@ -17,12 +17,15 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+
+    // setting up authorities level
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 configurer -> configurer
-                        .requestMatchers("/studentProfiles/**").hasAuthority(String.valueOf(Role.STUDENT))
-                        .requestMatchers("/facultyprofiles/**").hasAuthority(String.valueOf(Role.FACULTY_MEMBER))
+                        .requestMatchers("/studentProfiles/**").hasAnyAuthority(String.valueOf(Role.STUDENT), String.valueOf(Role.ADMINISTRATOR))
+                        .requestMatchers("/facultyprofiles/**").hasAnyAuthority(String.valueOf(Role.FACULTY_MEMBER), String.valueOf(Role.ADMINISTRATOR))
                         .requestMatchers("/administratorProfiles/**").hasAuthority(String.valueOf(Role.ADMINISTRATOR))
                         .anyRequest().authenticated()
         );
@@ -30,6 +33,8 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable());
         return http.build();
     }
+
+    // i am using noop password encoder for simplicity sake
 
     @Bean
     public AuthenticationProvider authenticationProvider(){

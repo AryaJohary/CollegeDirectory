@@ -4,6 +4,7 @@ import com.aryajohary.collegedirectory.dto.AdministratorProfileDTO;
 import com.aryajohary.collegedirectory.schemas.AdministratorProfile;
 import com.aryajohary.collegedirectory.schemas.Department;
 import com.aryajohary.collegedirectory.schemas.Role;
+import com.aryajohary.collegedirectory.schemas.StudentProfile;
 import com.aryajohary.collegedirectory.services.AdministratorProfileService;
 import com.aryajohary.collegedirectory.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,28 @@ public class AdministratorProfileController {
     @Autowired
     private DepartmentService departmentService;
 
+    // this was made just so that I can have a look at
+    // the syntax of User
+    // so that I can know the structure to be put in
+    // json format
     @GetMapping("/syntax")
     public AdministratorProfileDTO sendSyntax(){
         return new AdministratorProfileDTO();
     }
 
-
+    // this helps in setting the proper StudentProfile object
+    // by first creating a DTO, and then setting up the Roles and Department values
+    // here in this controller
     @PostMapping
     public ResponseEntity<AdministratorProfile> createAdministratorProfile(@RequestBody AdministratorProfileDTO administratorProfileDTO) {
-        // Retrieve the Department entity by departmentId
+        // get Department entity by departmentId
         Department department = departmentService.findById(administratorProfileDTO.getDepartmentId());
 
         if (department == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // Handle if department is not found
         }
 
-        // Create a new administratorProfile entity
+        //  new administratorProfile entity
         AdministratorProfile administratorProfile = new AdministratorProfile();
         administratorProfile.setUsername(administratorProfileDTO.getUsername());
         administratorProfile.setPassword(administratorProfileDTO.getPassword());
@@ -47,13 +54,26 @@ public class AdministratorProfileController {
         administratorProfile.setPhone(administratorProfileDTO.getPhone());
         administratorProfile.setPhoto(administratorProfileDTO.getPhoto());
 
-        // Set the department
+        // set department
         administratorProfile.setDepartment(department);
 
-        // Save the student profile
+        // save student profile
         administratorProfileService.save(administratorProfile);
 
         return ResponseEntity.ok(administratorProfile);
+    }
+
+    @PutMapping("/{id}")
+    public AdministratorProfile updateStudent(@PathVariable Long id, @RequestBody StudentProfile administratorProfile){
+        AdministratorProfile currAdministrator = administratorProfileService.findById(id);
+        currAdministrator.setDepartment(administratorProfile.getDepartment());
+        currAdministrator.setEmail(administratorProfile.getEmail());
+        currAdministrator.setName(administratorProfile.getName());
+        currAdministrator.setPassword(administratorProfile.getPassword());
+        currAdministrator.setPhone(administratorProfile.getPhone());
+        currAdministrator.setPhoto(administratorProfile.getPhoto());
+        currAdministrator.setUsername(administratorProfile.getUsername());
+        return administratorProfileService.save(currAdministrator);
     }
 
     @GetMapping

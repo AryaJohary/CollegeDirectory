@@ -7,9 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class UserPrincipal implements UserDetails {
+
+    // i will use this user variable to later access the role so that I can
+    // determine its access level
 
     private User user;
 
@@ -25,6 +27,8 @@ public class UserPrincipal implements UserDetails {
     }
 
 
+    // getting the username password as is from the user
+
     @Override
     public String getPassword() {
         return user.getPassword();
@@ -34,6 +38,9 @@ public class UserPrincipal implements UserDetails {
     public String getUsername() {
         return user.getUsername();
     }
+
+    // and since we don't have rest fields in the table itself
+    // i will manually mark all the required boolean values true
 
     @Override
     public boolean isEnabled() {

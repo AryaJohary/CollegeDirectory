@@ -2,6 +2,7 @@ package com.aryajohary.collegedirectory.services;
 
 import com.aryajohary.collegedirectory.repos.FacultyProfileRepository;
 import com.aryajohary.collegedirectory.schemas.FacultyProfile;
+import com.aryajohary.collegedirectory.schemas.StudentProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,4 +37,15 @@ public class FacultyProfileService {
     public void deleteById(Long id) {
         facultyProfileRepository.deleteById(id);
     }
+
+    // i have created this custom method to do this
+    // as mentioned in the main assignment file
+
+    // Fetch and display class list from the database.
+
+
+    public List<StudentProfile> listStudents(Long id){
+        return facultyProfileRepository.findStudentsInFacultyCourses(id);
+    }
+
 }

@@ -13,6 +13,10 @@ public class EnrollmentController {
     @Autowired
     private EnrollmentService enrollmentService;
 
+    // this was made just so that I can have a look at
+    // the syntax of User
+    // so that I can know the structure to be put in
+    // json format
     @GetMapping("/syntax")
     public Enrollment sendSyntax(){
         return new Enrollment();

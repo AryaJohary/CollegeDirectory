@@ -1,6 +1,19 @@
 package com.aryajohary.collegedirectory.dto;
 
-import com.aryajohary.collegedirectory.schemas.AdministratorProfile;
+/***
+ * I have used this DTO because to create a
+ * AdministratorProfile, we need a Department object to be
+ * put in the department field.
+ * We can't pass that object directly from the
+ * form, so, instead I am getting the department Id
+ * and then fetching the department object using that Id
+ * so that I can put it in the table as a proper
+ * AdministratorProfile object
+ *
+ * This part where i fetch and set up the department
+ * takes place in the controller file
+ * ***/
+
 
 public class AdministratorProfileDTO {
     private String username;
@@ -14,10 +27,8 @@ public class AdministratorProfileDTO {
     public AdministratorProfileDTO(){}
 
 
-    // i am only using it to get syntax
     public AdministratorProfileDTO(String username,
                                    String password,
-                                   String role,
                                    String name,
                                    String email,
                                    String phone,

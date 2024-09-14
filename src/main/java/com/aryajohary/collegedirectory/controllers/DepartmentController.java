@@ -13,6 +13,10 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    // this was made just so that I can have a look at
+    // the syntax of User
+    // so that I can know the structure to be put in
+    // json format
     @GetMapping("/syntax")
     public Department sendSyntax(){
         return new Department();

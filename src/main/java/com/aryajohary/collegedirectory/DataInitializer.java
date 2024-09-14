@@ -1,7 +1,6 @@
 package com.aryajohary.collegedirectory;
 
 
-import com.aryajohary.collegedirectory.repos.DepartmentRepository;
 import com.aryajohary.collegedirectory.schemas.*;
 import com.aryajohary.collegedirectory.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+/***
+ * I have used this file to initialize some data in sql for
+ * testing purposes. Here i use the respective services to
+ * push a list of data items into the sql table
+ * ***/
+
+
 
 @Component
 public class DataInitializer {
@@ -31,15 +38,14 @@ public class DataInitializer {
 
     @Autowired
     private EnrollmentService enrollmentService;
-    @Autowired
-    private DepartmentRepository departmentRepository;
+
 
     @Bean
     public CommandLineRunner commandLineRunner() {
         return runner -> createCollegeRecords();
     }
 
-    // Method to create and return the list of departments
+    // create and return the list of departments
     private List<Department> createDepartments() {
         Department csDepartment = new Department("Computer Science", "Department of Computer Science");
         Department mathDepartment = new Department("Mathematics", "Department of Mathematics");
@@ -49,7 +55,7 @@ public class DataInitializer {
         return List.of(csDepartment, mathDepartment, physicsDepartment, chemistryDepartment);
     }
 
-    // Method to create and return the list of student profiles
+    // create and return the list of student profiles
     private List<StudentProfile> createStudentProfiles(List<Department> departments) {
         Department csDepartment = departments.get(0);
         Department mathDepartment = departments.get(1);
@@ -108,7 +114,7 @@ public class DataInitializer {
     }
 
 
-    // Method to create and return the list of faculty profiles
+    // create and return the list of faculty profiles
     private List<FacultyProfile> createFacultyProfiles(List<Department> departments) {
         Department csDepartment = departments.get(0);
         Department chemistryDepartment = departments.get(3);
@@ -154,7 +160,7 @@ public class DataInitializer {
     }
 
 
-    // Method to create and return the list of administrator profiles
+    // create and return the list of administrator profiles
     private List<AdministratorProfile> createAdministratorProfiles(List<Department> departments) {
         Department csDepartment = departments.get(0);
         Department physicsDepartment = departments.get(2);
@@ -196,7 +202,7 @@ public class DataInitializer {
         return List.of(adminProfile, adminProfile2, adminProfile3);
     }
 
-    // Method to create and return the list of courses
+    // create and return the list of courses
     private List<Course> createCourses(List<FacultyProfile> facultyProfiles, List<Department> departments) {
         Department csDepartment = departments.get(0);
         Department mathDepartment = departments.get(1);
@@ -238,7 +244,7 @@ public class DataInitializer {
         return List.of(course1, course2, course3, course4);
     }
 
-    // Method to create and return the list of enrollments
+    // create and return the list of enrollments
     private List<Enrollment> createEnrollments(List<StudentProfile> students, List<Course> courses) {
         Enrollment enrollment1 = new Enrollment(students.get(0), courses.get(1));
         Enrollment enrollment2 = new Enrollment(students.get(1), courses.get(0));
@@ -248,14 +254,19 @@ public class DataInitializer {
         return List.of(enrollment1, enrollment2, enrollment3, enrollment4);
     }
 
-    // Main method to organize the creation process
+    // main method to organize the creation process
     public void createCollegeRecords() {
+
+        // below i created lists for data to be inserted in sql database
+
         List<Department> departmentList = createDepartments();
         List<StudentProfile> studentProfiles = createStudentProfiles(departmentList);
         List<FacultyProfile> facultyProfiles = createFacultyProfiles(departmentList);
         List<AdministratorProfile> administratorProfiles = createAdministratorProfiles(departmentList);
         List<Course> courseList = createCourses(facultyProfiles, departmentList);
         List<Enrollment> enrollmentList = createEnrollments(studentProfiles, courseList);
+
+        // now using the services to actually insert the data
 
         departmentService.saveAll(departmentList);
         studentProfileService.saveAll(studentProfiles);

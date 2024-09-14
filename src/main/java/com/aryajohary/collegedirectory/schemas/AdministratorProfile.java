@@ -10,6 +10,7 @@ public class AdministratorProfile extends User{
 
     private String photo;
 
+    // there can be multiple administrators in a single department
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;

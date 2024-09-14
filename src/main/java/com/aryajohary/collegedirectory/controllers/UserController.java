@@ -1,6 +1,5 @@
 package com.aryajohary.collegedirectory.controllers;
 
-import com.aryajohary.collegedirectory.schemas.Role;
 import com.aryajohary.collegedirectory.schemas.User;
 import com.aryajohary.collegedirectory.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    // this was made just so that I can have a look at
+    // the syntax of User
+    // so that I can know the structure to be put in
+    // json format
     @GetMapping("/syntax")
     public User sendSyntax(){
         return new User();

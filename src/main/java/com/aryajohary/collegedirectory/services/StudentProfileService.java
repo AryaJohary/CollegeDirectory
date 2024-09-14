@@ -1,6 +1,7 @@
 package com.aryajohary.collegedirectory.services;
 
 import com.aryajohary.collegedirectory.repos.StudentProfileRepository;
+import com.aryajohary.collegedirectory.schemas.FacultyProfile;
 import com.aryajohary.collegedirectory.schemas.StudentProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,4 +37,14 @@ public class StudentProfileService {
     public void deleteById(Long id) {
         studentProfileRepository.deleteById(id);
     }
+
+    // i have created this custom method to do this
+    // as mentioned in the main assignment file
+
+    // Fetch and display advisor details from the database
+
+    public List<FacultyProfile> findFacultyForStudent(Long id){
+        return studentProfileRepository.findFacultyForStudent(id);
+    }
+
 }

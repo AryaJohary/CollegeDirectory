@@ -11,6 +11,8 @@ public class StudentProfile extends User {
     private String photo;
     private String year;
 
+    // many students can belong to single department
+
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
@@ -32,6 +34,8 @@ public class StudentProfile extends User {
         this.year = year;
         this.department = department;
     }
+
+
 
     public String getPhoto() {
         return photo;

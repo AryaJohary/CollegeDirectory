@@ -3,8 +3,6 @@ package com.aryajohary.collegedirectory.schemas;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
-
 
 @Entity
 @Table(name = "department")
@@ -21,7 +19,6 @@ public class Department {
         this.name = name;
         this.description = description;
     }
-
 
     public Long getId() {
         return id;

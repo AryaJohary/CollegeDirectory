@@ -9,10 +9,14 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // many enrollments can belong to a single students
+    // in other words, one student can have multiple courses, hence multiple enrollments
     @ManyToOne
     @JoinColumn(name = "student_id", referencedColumnName = "user_id", nullable = false)
     private StudentProfile studentProfile;
 
+    // multiple enrollments can belong to a single course
+    // in other words, one course can have multiple enrollments
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
     private Course course;

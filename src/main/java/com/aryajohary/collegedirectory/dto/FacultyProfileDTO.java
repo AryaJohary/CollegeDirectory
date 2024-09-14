@@ -1,5 +1,19 @@
 package com.aryajohary.collegedirectory.dto;
 
+/***
+ * I have used this DTO because to create a
+ * FacultyProfile, we need a Department object to be
+ * put in the department field.
+ * We can't pass that object directly from the
+ * form, so, instead I am getting the department Id
+ * and then fetching the department object using that Id
+ * so that I can put it in the table as a proper
+ * FacultyProfile object
+ *
+ * This part where i fetch and set up the department
+ * takes place in the controller file
+ * ***/
+
 public class FacultyProfileDTO {
     private String username;
     private String password;

@@ -13,6 +13,10 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    // this was made just so that I can have a look at
+    // the syntax of User
+    // so that I can know the structure to be put in
+    // json format
     @GetMapping("/syntax")
     public Course sendSyntax(){
         return new Course();
