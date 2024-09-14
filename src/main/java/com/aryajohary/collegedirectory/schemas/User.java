@@ -2,6 +2,11 @@ package com.aryajohary.collegedirectory.schemas;
 
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 //
 //@MappedSuperclass
@@ -92,4 +97,5 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 }
