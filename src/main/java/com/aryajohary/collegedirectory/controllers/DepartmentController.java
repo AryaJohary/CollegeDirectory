@@ -13,6 +13,11 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    @GetMapping("/syntax")
+    public Department sendSyntax(){
+        return new Department();
+    }
+
     @PostMapping
     public Department createDepartment(@RequestBody Department department) {
         return departmentService.save(department);

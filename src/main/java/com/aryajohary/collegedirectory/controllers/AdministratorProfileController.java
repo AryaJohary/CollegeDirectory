@@ -24,8 +24,8 @@ public class AdministratorProfileController {
     private DepartmentService departmentService;
 
     @GetMapping("/syntax")
-    public AdministratorProfile sendSyntax(){
-        return new AdministratorProfile("","", Role.ADMINISTRATOR,"","","","",new Department());
+    public AdministratorProfileDTO sendSyntax(){
+        return new AdministratorProfileDTO();
     }
 
 
@@ -42,7 +42,7 @@ public class AdministratorProfileController {
         AdministratorProfile administratorProfile = new AdministratorProfile();
         administratorProfile.setUsername(administratorProfileDTO.getUsername());
         administratorProfile.setPassword(administratorProfileDTO.getPassword());
-        administratorProfile.setRole(Role.FACULTY_MEMBER);
+        administratorProfile.setRole(Role.ADMINISTRATOR);
         administratorProfile.setName(administratorProfileDTO.getName());
         administratorProfile.setEmail(administratorProfileDTO.getEmail());
         administratorProfile.setPhone(administratorProfileDTO.getPhone());

@@ -13,6 +13,11 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @GetMapping("/syntax")
+    public Course sendSyntax(){
+        return new Course();
+    }
+
     @PostMapping
     public Course createCourse(@RequestBody Course course) {
         return courseService.save(course);

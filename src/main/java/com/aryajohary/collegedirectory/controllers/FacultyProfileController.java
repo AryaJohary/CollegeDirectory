@@ -23,8 +23,8 @@ public class FacultyProfileController {
     private DepartmentService departmentService;
 
     @GetMapping("/syntax")
-    public FacultyProfile sendSyntax(){
-        return new FacultyProfile("","",Role.FACULTY_MEMBER, "","", "", "", new Department(), "");
+    public FacultyProfileDTO sendSyntax(){
+        return new FacultyProfileDTO();
     }
 
 

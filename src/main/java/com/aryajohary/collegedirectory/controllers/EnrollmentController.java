@@ -13,6 +13,11 @@ public class EnrollmentController {
     @Autowired
     private EnrollmentService enrollmentService;
 
+    @GetMapping("/syntax")
+    public Enrollment sendSyntax(){
+        return new Enrollment();
+    }
+
     @PostMapping
     public Enrollment createEnrollment(@RequestBody Enrollment enrollment) {
         return enrollmentService.save(enrollment);

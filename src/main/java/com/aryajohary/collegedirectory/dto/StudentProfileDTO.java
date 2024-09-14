@@ -3,13 +3,33 @@ package com.aryajohary.collegedirectory.dto;
 public class StudentProfileDTO {
     private String username;
     private String password;
-    private String role;
     private String name;
     private String email;
     private String phone;
     private String photo;
     private String year;
     private Long departmentId;
+
+    public StudentProfileDTO(){}
+
+    public StudentProfileDTO(String username,
+                             String password,
+                             String role,
+                             String name,
+                             String email,
+                             String phone,
+                             String photo,
+                             String year,
+                             Long departmentId) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.photo = photo;
+        this.year = year;
+        this.departmentId = departmentId;
+    }
 
     public String getUsername() {
         return username;
@@ -27,13 +47,6 @@ public class StudentProfileDTO {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getName() {
         return name;

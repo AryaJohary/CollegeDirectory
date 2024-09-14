@@ -24,8 +24,8 @@ public class StudentProfileController {
     private DepartmentService departmentService;
 
     @GetMapping("/syntax")
-    public StudentProfile sendSyntax(){
-        return new StudentProfile("", "", Role.STUDENT, "", "", "", "", "", new Department());
+    public StudentProfileDTO sendSyntax(){
+        return new StudentProfileDTO();
     }
 
     @PostMapping

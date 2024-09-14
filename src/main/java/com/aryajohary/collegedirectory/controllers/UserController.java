@@ -16,7 +16,7 @@ public class UserController {
 
     @GetMapping("/syntax")
     public User sendSyntax(){
-        return new User("","", Role.STUDENT,"","","");
+        return new User();
     }
 
     @PostMapping

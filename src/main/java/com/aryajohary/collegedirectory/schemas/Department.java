@@ -15,32 +15,37 @@ public class Department {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "department")
-    private Set<StudentProfile> students;
-
-    @OneToMany(mappedBy = "department")
-    private Set<FacultyProfile> facultyMembers;
-
-    @OneToMany(mappedBy = "department")
-    private Set<AdministratorProfile> administrators;
-
-    @OneToMany(mappedBy = "department")
-    private Set<Course> courses;
+//    @OneToMany(mappedBy = "department")
+//    private Set<StudentProfile> students;
+//
+//    @OneToMany(mappedBy = "department")
+//    private Set<FacultyProfile> facultyMembers;
+//
+//    @OneToMany(mappedBy = "department")
+//    private Set<AdministratorProfile> administrators;
+//
+//    @OneToMany(mappedBy = "department")
+//    private Set<Course> courses;
 
     public Department(){}
 
-    public Department(String name, String description,
-                      Set<StudentProfile> students,
-                      Set<FacultyProfile> facultyMembers,
-                      Set<AdministratorProfile> administrators,
-                      Set<Course> courses) {
+    public Department(String name, String description) {
         this.name = name;
         this.description = description;
-        this.students = students;
-        this.facultyMembers = facultyMembers;
-        this.administrators = administrators;
-        this.courses = courses;
     }
+
+    //    public Department(String name, String description,
+//                      Set<StudentProfile> students,
+//                      Set<FacultyProfile> facultyMembers,
+//                      Set<AdministratorProfile> administrators,
+//                      Set<Course> courses) {
+//        this.name = name;
+//        this.description = description;
+//        this.students = students;
+//        this.facultyMembers = facultyMembers;
+//        this.administrators = administrators;
+//        this.courses = courses;
+//    }
 
     public Long getId() {
         return id;
@@ -64,37 +69,5 @@ public class Department {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<StudentProfile> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<StudentProfile> students) {
-        this.students = students;
-    }
-
-    public Set<FacultyProfile> getFacultyMembers() {
-        return facultyMembers;
-    }
-
-    public void setFacultyMembers(Set<FacultyProfile> facultyMembers) {
-        this.facultyMembers = facultyMembers;
-    }
-
-    public Set<AdministratorProfile> getAdministrators() {
-        return administrators;
-    }
-
-    public void setAdministrators(Set<AdministratorProfile> administrators) {
-        this.administrators = administrators;
-    }
-
-    public Set<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
     }
 }

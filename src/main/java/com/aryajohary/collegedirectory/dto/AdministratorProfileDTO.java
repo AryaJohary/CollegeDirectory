@@ -1,14 +1,36 @@
 package com.aryajohary.collegedirectory.dto;
 
+import com.aryajohary.collegedirectory.schemas.AdministratorProfile;
+
 public class AdministratorProfileDTO {
     private String username;
     private String password;
-    private String role;
     private String name;
     private String email;
     private String phone;
     private String photo;
     private Long departmentId;
+
+    public AdministratorProfileDTO(){}
+
+
+    // i am only using it to get syntax
+    public AdministratorProfileDTO(String username,
+                                   String password,
+                                   String role,
+                                   String name,
+                                   String email,
+                                   String phone,
+                                   String photo,
+                                   Long departmentId) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.photo = photo;
+        this.departmentId = departmentId;
+    }
 
     public String getEmail() {
         return email;
@@ -34,13 +56,6 @@ public class AdministratorProfileDTO {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getName() {
         return name;
