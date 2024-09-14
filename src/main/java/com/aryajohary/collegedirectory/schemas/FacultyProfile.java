@@ -18,13 +18,20 @@ public class FacultyProfile extends User{
 
     public FacultyProfile(){}
 
-    public FacultyProfile(String photo, Department department, String officeHours) {
+    public FacultyProfile(String username,
+                          String password,
+                          Role role,
+                          String name,
+                          String email,
+                          String phone,
+                          String photo,
+                          Department department,
+                          String officeHours) {
+        super(username, password, role, name, email, phone);
         this.photo = photo;
         this.department = department;
         this.officeHours = officeHours;
     }
-
-
 
     public String getPhoto() {
         return photo;

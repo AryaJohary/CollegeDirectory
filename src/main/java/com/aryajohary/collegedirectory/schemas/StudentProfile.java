@@ -17,12 +17,21 @@ public class StudentProfile extends User {
 
     public StudentProfile(){}
 
-    public StudentProfile(String photo, String year, Department department) {
+
+    public StudentProfile(String username,
+                          String password,
+                          Role role,
+                          String name,
+                          String email,
+                          String phone,
+                          String photo,
+                          String year,
+                          Department department) {
+        super(username, password, role, name, email, phone);
         this.photo = photo;
         this.year = year;
         this.department = department;
     }
-
 
     public String getPhoto() {
         return photo;

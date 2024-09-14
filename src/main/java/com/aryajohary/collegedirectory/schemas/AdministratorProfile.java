@@ -16,12 +16,19 @@ public class AdministratorProfile extends User{
 
     public AdministratorProfile(){}
 
-    public AdministratorProfile(String photo, Department department) {
+
+    public AdministratorProfile(String username,
+                                String password,
+                                Role role,
+                                String name,
+                                String email,
+                                String phone,
+                                String photo,
+                                Department department) {
+        super(username, password, role, name, email, phone);
         this.photo = photo;
         this.department = department;
     }
-
-
 
     public String getPhoto() {
         return photo;
