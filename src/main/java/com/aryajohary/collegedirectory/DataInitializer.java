@@ -36,10 +36,7 @@ public class DataInitializer {
 
     @Bean
     public CommandLineRunner commandLineRunner() {
-        return runner ->
-        {
-            createCollegeRecords();
-        };
+        return runner -> createCollegeRecords();
     }
 
     // Method to create and return the list of departments
@@ -60,55 +57,56 @@ public class DataInitializer {
         Department chemistryDepartment = departments.get(3);
 
         StudentProfile studentProfile1 = new StudentProfile(
-                "asmith",
+                "arya_student1",
                 "password456",
                 Role.STUDENT,
-                "Alice Smith",
-                "asmith@example.com",
+                "Arya Student 1",
+                "arya@student1.com",
                 "234-567-8901",
-                "https://example.com/photos/asmith.jpg",
-                "Sophomore",
+                "https://example.com/photos/arya_student1.jpg",
+                "2",
                 mathDepartment
         );
 
         StudentProfile studentProfile2 = new StudentProfile(
-                "bjohnson",
+                "arya_student2",
                 "password789",
                 Role.STUDENT,
-                "Bob Johnson",
-                "bjohnson@example.com",
+                "Arya Student 2",
+                "arya@student2.com",
                 "345-678-9012",
-                "https://example.com/photos/bjohnson.jpg",
-                "Freshman",
+                "https://example.com/photos/arya_student2.jpg",
+                "1",
                 csDepartment
         );
 
         StudentProfile studentProfile3 = new StudentProfile(
-                "cclark",
+                "arya_student3",
                 "password303",
                 Role.STUDENT,
-                "Charlie Clark",
-                "cclark@example.com",
+                "Arya Student 3",
+                "arya@student3.com",
                 "789-012-3456",
-                "https://example.com/photos/cclark.jpg",
-                "Junior",
+                "https://example.com/photos/arya_student3.jpg",
+                "3",
                 chemistryDepartment
         );
 
         StudentProfile studentProfile4 = new StudentProfile(
-                "dperry",
+                "arya_student4",
                 "password404",
                 Role.STUDENT,
-                "Dana Perry",
-                "dperry@example.com",
+                "Arya Student 4",
+                "arya@student4.com",
                 "890-123-4567",
-                "https://example.com/photos/dperry.jpg",
-                "Senior",
+                "https://example.com/photos/arya_student4.jpg",
+                "4",
                 physicsDepartment
         );
 
         return List.of(studentProfile1, studentProfile2, studentProfile3, studentProfile4);
     }
+
 
     // Method to create and return the list of faculty profiles
     private List<FacultyProfile> createFacultyProfiles(List<Department> departments) {
@@ -117,43 +115,44 @@ public class DataInitializer {
         Department mathDepartment = departments.get(1);
 
         FacultyProfile facultyProfile1 = new FacultyProfile(
-                "jdoe",
+                "arya_faculty1",
                 "password123",
                 Role.FACULTY_MEMBER,
-                "John Doe",
-                "jdoe@example.com",
+                "Arya Faculty 1",
+                "arya@faculty1.com",
                 "123-456-7890",
-                "https://example.com/photos/jdoe.jpg",
+                "https://example.com/photos/arya_faculty1.jpg",
                 chemistryDepartment,
                 "9 AM - 5 PM"
         );
 
         FacultyProfile facultyProfile2 = new FacultyProfile(
-                "mbrown",
+                "arya_faculty2",
                 "password101",
                 Role.FACULTY_MEMBER,
-                "Mary Brown",
-                "mbrown@example.com",
+                "Arya Faculty 2",
+                "arya@faculty2.com",
                 "567-890-1234",
-                "https://example.com/photos/mbrown.jpg",
+                "https://example.com/photos/arya_faculty2.jpg",
                 csDepartment,
                 "10 AM - 4 PM"
         );
 
         FacultyProfile facultyProfile3 = new FacultyProfile(
-                "rwhite",
+                "arya_faculty3",
                 "password202",
                 Role.FACULTY_MEMBER,
-                "Richard White",
-                "rwhite@example.com",
+                "Arya Faculty 3",
+                "arya@faculty3.com",
                 "678-901-2345",
-                "https://example.com/photos/rwhite.jpg",
+                "https://example.com/photos/arya_faculty3.jpg",
                 mathDepartment,
                 "11 AM - 3 PM"
         );
 
         return List.of(facultyProfile1, facultyProfile2, facultyProfile3);
     }
+
 
     // Method to create and return the list of administrator profiles
     private List<AdministratorProfile> createAdministratorProfiles(List<Department> departments) {
@@ -241,10 +240,10 @@ public class DataInitializer {
 
     // Method to create and return the list of enrollments
     private List<Enrollment> createEnrollments(List<StudentProfile> students, List<Course> courses) {
-        Enrollment enrollment1 = new Enrollment(students.get(0), courses.get(1)); // Alice takes Linear Algebra
-        Enrollment enrollment2 = new Enrollment(students.get(1), courses.get(0)); // Bob takes Programming
-        Enrollment enrollment3 = new Enrollment(students.get(2), courses.get(2)); // Charlie takes Organic Chemistry
-        Enrollment enrollment4 = new Enrollment(students.get(3), courses.get(3)); // Dana takes Thermodynamics
+        Enrollment enrollment1 = new Enrollment(students.get(0), courses.get(1));
+        Enrollment enrollment2 = new Enrollment(students.get(1), courses.get(0));
+        Enrollment enrollment3 = new Enrollment(students.get(2), courses.get(2));
+        Enrollment enrollment4 = new Enrollment(students.get(3), courses.get(3));
 
         return List.of(enrollment1, enrollment2, enrollment3, enrollment4);
     }
