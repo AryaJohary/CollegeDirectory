@@ -34,18 +34,6 @@ public class Department {
         this.description = description;
     }
 
-    //    public Department(String name, String description,
-//                      Set<StudentProfile> students,
-//                      Set<FacultyProfile> facultyMembers,
-//                      Set<AdministratorProfile> administrators,
-//                      Set<Course> courses) {
-//        this.name = name;
-//        this.description = description;
-//        this.students = students;
-//        this.facultyMembers = facultyMembers;
-//        this.administrators = administrators;
-//        this.courses = courses;
-//    }
 
     public Long getId() {
         return id;

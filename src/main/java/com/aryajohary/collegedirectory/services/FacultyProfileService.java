@@ -21,6 +21,10 @@ public class FacultyProfileService {
         return facultyProfileRepository.save(facultyProfile);
     }
 
+    public List<FacultyProfile> saveAll(List<FacultyProfile> facultyProfileList) {
+        return facultyProfileRepository.saveAll(facultyProfileList);
+    }
+
     public List<FacultyProfile> findAll() {
         return facultyProfileRepository.findAll();
     }

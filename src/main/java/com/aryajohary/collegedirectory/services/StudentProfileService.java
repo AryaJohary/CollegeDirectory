@@ -21,6 +21,10 @@ public class StudentProfileService {
         return studentProfileRepository.save(studentProfile);
     }
 
+    public List<StudentProfile> saveAll(List<StudentProfile> studentProfileList){
+        return studentProfileRepository.saveAll(studentProfileList);
+    }
+
     public List<StudentProfile> findAll() {
         return studentProfileRepository.findAll();
     }

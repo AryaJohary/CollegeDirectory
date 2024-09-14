@@ -21,6 +21,10 @@ public class AdministratorProfileService {
         return administratorProfileRepository.save(administratorProfile);
     }
 
+    public List<AdministratorProfile> saveAll(List<AdministratorProfile> administratorProfileList){
+        return administratorProfileRepository.saveAll(administratorProfileList);
+    }
+
     public List<AdministratorProfile> findAll() {
         return administratorProfileRepository.findAll();
     }

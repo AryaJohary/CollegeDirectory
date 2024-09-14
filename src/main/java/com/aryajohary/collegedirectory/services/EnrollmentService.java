@@ -21,6 +21,10 @@ public class EnrollmentService {
         return enrollmentRepository.save(enrollment);
     }
 
+    public List<Enrollment> saveAll(List<Enrollment> enrollmentList){
+        return enrollmentRepository.saveAll(enrollmentList);
+    }
+
     public List<Enrollment> findAll() {
         return enrollmentRepository.findAll();
     }

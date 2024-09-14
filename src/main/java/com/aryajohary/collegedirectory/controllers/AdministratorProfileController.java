@@ -3,7 +3,6 @@ package com.aryajohary.collegedirectory.controllers;
 import com.aryajohary.collegedirectory.dto.AdministratorProfileDTO;
 import com.aryajohary.collegedirectory.schemas.AdministratorProfile;
 import com.aryajohary.collegedirectory.schemas.Department;
-import com.aryajohary.collegedirectory.schemas.AdministratorProfile;
 import com.aryajohary.collegedirectory.schemas.Role;
 import com.aryajohary.collegedirectory.services.AdministratorProfileService;
 import com.aryajohary.collegedirectory.services.DepartmentService;

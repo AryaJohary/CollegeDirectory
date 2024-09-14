@@ -21,6 +21,10 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
+    public List<Department> saveAll(List<Department> departmentList){
+        return departmentRepository.saveAll(departmentList);
+    }
+
     public List<Department> findAll() {
         return departmentRepository.findAll();
     }
