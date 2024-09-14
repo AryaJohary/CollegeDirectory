@@ -1,5 +1,6 @@
 package com.aryajohary.collegedirectory.controllers;
 
+import com.aryajohary.collegedirectory.schemas.Role;
 import com.aryajohary.collegedirectory.schemas.User;
 import com.aryajohary.collegedirectory.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,11 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @GetMapping("/syntax")
+    public User sendSyntax(){
+        return new User("","", Role.STUDENT,"","","");
+    }
 
     @PostMapping
     public User createUser(@RequestBody User user) {
