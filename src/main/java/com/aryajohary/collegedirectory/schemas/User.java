@@ -6,8 +6,9 @@ import jakarta.persistence.*;
 //
 //@MappedSuperclass
 @Entity
+@Table(name = "\"user\"")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
