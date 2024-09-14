@@ -1,8 +1,5 @@
 # College Directory Application
 
-### I have included proper comments in each file for better code readability
-### One can refer to those in case of any confusion with code
-
 ## Tasks I Finished
 
 - Set up Spring Boot Hibernate JPA with proper table schema implementation.
@@ -60,6 +57,3 @@
 
 > **Note:**  
 > Due to time constraints, I was not able to work on the frontend part. However, I was given this assignment with a significant scope, and I was able to complete the backend functionalities as outlined above despite the complexity and scale of the project. I now have to submit it, but I would greatly appreciate the opportunity to continue and further improve upon it if given the chance to move forward with the intern hiring process.
-
-
-### THANK YOU FOR WATCHING IT
