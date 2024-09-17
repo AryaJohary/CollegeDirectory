@@ -55,5 +55,6 @@
 
 ---
 
-> **Note:**  
-> Due to time constraints, I was not able to work on the frontend part. However, I was given this assignment with a significant scope, and I was able to complete the backend functionalities as outlined above despite the complexity and scale of the project. I now have to submit it, but I would greatly appreciate the opportunity to continue and further improve upon it if given the chance to move forward with the intern hiring process.
+[//]: # (> **Note:**  )
+
+[//]: # (> Due to time constraints, I was not able to work on the frontend part. However, I was given this assignment with a significant scope, and I was able to complete the backend functionalities as outlined above despite the complexity and scale of the project. I now have to submit it, but I would greatly appreciate the opportunity to continue and further improve upon it if given the chance to move forward with the intern hiring process.)
