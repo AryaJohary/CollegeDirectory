@@ -2,6 +2,9 @@ package com.aryajohary.collegedirectory.schemas;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "\"user\"")
@@ -13,12 +16,27 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull(message = "Must have a username")
+    @Size(min = 6, max = 16, message = "Username length must be between 6 and 16")
+    @Pattern(regexp = "^[a-zA-Z0-9._]{6,16}$", message = "Not a valid username")
     private String username;
+
+    @NotNull(message = "Must have a password")
+    @Size(min = 6, max = 16, message = "Password length must be between 8 and 16")
     private String password;
+
+    @NotNull(message = "Role is required")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+    @NotNull(message = "Must have name")
     private String name;
+
+    @NotNull(message = "Must have an email")
     private String email;
+
     private String phone;
 
 

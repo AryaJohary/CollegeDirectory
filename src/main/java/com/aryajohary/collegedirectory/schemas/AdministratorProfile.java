@@ -1,18 +1,25 @@
 package com.aryajohary.collegedirectory.schemas;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "adminstratorprofile")
 @PrimaryKeyJoinColumn(name = "user_id")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class AdministratorProfile extends User{
 
-
+    @Size(max = 50, message = "Photo url length should be under 255")
     private String photo;
 
     // there can be multiple administrators in a single department
+    @NotNull(message = "Department ID can't be null")
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Department department;
 
     public AdministratorProfile(){}

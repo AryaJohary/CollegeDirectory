@@ -1,6 +1,10 @@
 package com.aryajohary.collegedirectory.schemas;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "course")
@@ -8,20 +12,27 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull(message = "Title can't be null")
+    @Size(max = 100, message = "Title length must be less than 100")
     private String title;
     private String description;
 
     // many courses can belong to a single department
 
+    @NotNull(message = "Department ID can't be null")
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Department department;
 
     // many courses can belong to a single faculty
     // in other words, one faculty can teach multiple courses
 
+    @NotNull(message = "Faculty ID can't be null")
     @ManyToOne
     @JoinColumn(name = "faculty_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private FacultyProfile facultyProfile;
 
     public Course(String title, String description, Department department, FacultyProfile facultyProfile) {

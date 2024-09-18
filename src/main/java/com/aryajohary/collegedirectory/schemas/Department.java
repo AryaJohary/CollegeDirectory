@@ -2,6 +2,8 @@ package com.aryajohary.collegedirectory.schemas;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -10,6 +12,9 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull(message = "Must have a department name")
+    @Size(max = 100, message = "Name length must be less than 100")
     private String name;
     private String description;
 
