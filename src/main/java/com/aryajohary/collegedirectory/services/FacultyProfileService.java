@@ -38,6 +38,10 @@ public class FacultyProfileService {
         facultyProfileRepository.deleteById(id);
     }
 
+    public long size(){
+        return facultyProfileRepository.count();
+    }
+
     // i have created this custom method to do this
     // as mentioned in the main assignment file
 

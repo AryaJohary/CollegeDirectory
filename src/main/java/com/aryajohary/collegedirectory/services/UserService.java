@@ -13,6 +13,7 @@ public class UserService {
 
     private UserRepository userRepository;
 
+
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -32,6 +33,10 @@ public class UserService {
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public long size(){
+        return userRepository.count();
     }
 
     // this method was created to search the database for the

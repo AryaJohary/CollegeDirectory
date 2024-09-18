@@ -36,4 +36,8 @@ public class CourseService {
     public void deleteById(Long id) {
         courseRepository.deleteById(id);
     }
+
+    public long size(){
+        return courseRepository.count();
+    }
 }

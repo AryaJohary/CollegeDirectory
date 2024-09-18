@@ -1,5 +1,6 @@
 package com.aryajohary.collegedirectory.controllers;
 
+import com.aryajohary.collegedirectory.exception_handling.CustomEntityNotFoundException;
 import com.aryajohary.collegedirectory.schemas.Enrollment;
 import com.aryajohary.collegedirectory.services.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,19 @@ public class EnrollmentController {
 
     @GetMapping("/{id}")
     public Enrollment getEnrollmentById(@PathVariable Long id) {
-        return enrollmentService.findById(id);
+        Enrollment currEnrollment = enrollmentService.findById(id);
+        if(currEnrollment == null){
+            throw new CustomEntityNotFoundException("Enrollment not found with Id: "+id);
+        }
+        return currEnrollment;
     }
 
     @DeleteMapping("/{id}")
     public void deleteEnrollment(@PathVariable Long id) {
+        Enrollment currEnrollment = enrollmentService.findById(id);
+        if(currEnrollment == null){
+            throw new CustomEntityNotFoundException("Enrollment not found with Id: "+id);
+        }
         enrollmentService.deleteById(id);
     }
 }

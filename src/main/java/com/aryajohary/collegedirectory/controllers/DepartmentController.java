@@ -1,5 +1,6 @@
 package com.aryajohary.collegedirectory.controllers;
 
+import com.aryajohary.collegedirectory.exception_handling.CustomEntityNotFoundException;
 import com.aryajohary.collegedirectory.schemas.Department;
 import com.aryajohary.collegedirectory.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,11 @@ public class DepartmentController {
 
     @GetMapping("/{id}")
     public Department getDepartmentById(@PathVariable Long id) {
-        return departmentService.findById(id);
+        Department currDepartment = departmentService.findById(id);
+        if(currDepartment == null){
+            throw new CustomEntityNotFoundException("Department not found with id: "+id);
+        }
+        return currDepartment;
     }
 
     @DeleteMapping("/{id}")

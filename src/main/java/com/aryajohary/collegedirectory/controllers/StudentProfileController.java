@@ -1,5 +1,6 @@
 package com.aryajohary.collegedirectory.controllers;
 
+import com.aryajohary.collegedirectory.exception_handling.CustomEntityNotFoundException;
 import com.aryajohary.collegedirectory.dto.StudentProfileDTO;
 import com.aryajohary.collegedirectory.schemas.Department;
 import com.aryajohary.collegedirectory.schemas.FacultyProfile;
@@ -8,7 +9,6 @@ import com.aryajohary.collegedirectory.schemas.StudentProfile;
 import com.aryajohary.collegedirectory.services.DepartmentService;
 import com.aryajohary.collegedirectory.services.StudentProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,12 +36,13 @@ public class StudentProfileController {
     // by first creating a DTO, and then setting up the Roles and Department values
     // here in this controller
     @PostMapping
-    public ResponseEntity<StudentProfile> createStudentProfile(@RequestBody StudentProfileDTO studentProfileDTO) {
+    public StudentProfile createStudentProfile(@RequestBody StudentProfileDTO studentProfileDTO) {
         // get the Department entity by departmentId
         Department department = departmentService.findById(studentProfileDTO.getDepartmentId());
 
-        if (department == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // Handle if department is not found
+        if(department == null){
+            throw new CustomEntityNotFoundException(
+                    "Department not found with Id - "+studentProfileDTO.getDepartmentId());
         }
 
         //  new StudentProfile entity
@@ -59,23 +60,39 @@ public class StudentProfileController {
         studentProfile.setDepartment(department);
 
         // save student profile
-        studentProfileService.save(studentProfile);
+        return studentProfileService.save(studentProfile);
 
-        return ResponseEntity.ok(studentProfile);
     }
 
     @PutMapping("/{id}")
-    public StudentProfile updateStudent(@PathVariable Long id, @RequestBody StudentProfile studentProfile){
-        StudentProfile currStudent = studentProfileService.findById(id);
-        currStudent.setDepartment(studentProfile.getDepartment());
-        currStudent.setEmail(studentProfile.getEmail());
-        currStudent.setName(studentProfile.getName());
-        currStudent.setPassword(studentProfile.getPassword());
-        currStudent.setPhone(studentProfile.getPhone());
-        currStudent.setPhoto(studentProfile.getPhoto());
-        currStudent.setUsername(studentProfile.getUsername());
-        currStudent.setYear(studentProfile.getYear());
-        return studentProfileService.save(currStudent);
+    public StudentProfile updateStudent(@PathVariable Long id, @RequestBody StudentProfileDTO studentProfileDTO){
+
+        StudentProfile studentProfile = studentProfileService.findById(id);
+        if(studentProfile == null){
+            throw new CustomEntityNotFoundException("Student Profile not found - "+id);
+        }
+
+        Department department = departmentService.findById(studentProfileDTO.getDepartmentId());
+
+        if(department == null){
+            throw new CustomEntityNotFoundException(
+                    "Department not found with Id - "+studentProfileDTO.getDepartmentId());
+        }
+
+        studentProfile.setDepartment(department);
+        studentProfile.setUsername(studentProfileDTO.getUsername());
+        studentProfile.setPassword(studentProfileDTO.getPassword());
+        studentProfile.setRole(Role.STUDENT);
+        studentProfile.setName(studentProfileDTO.getName());
+        studentProfile.setEmail(studentProfileDTO.getEmail());
+        studentProfile.setPhone(studentProfileDTO.getPhone());
+        studentProfile.setPhoto(studentProfileDTO.getPhoto());
+        studentProfile.setYear(studentProfileDTO.getYear());
+
+        // set department
+        studentProfile.setDepartment(department);
+
+        return studentProfileService.save(studentProfile);
     }
 
     @GetMapping
@@ -85,17 +102,29 @@ public class StudentProfileController {
 
     @GetMapping("/{id}")
     public StudentProfile getStudentProfileById(@PathVariable Long id) {
-        return studentProfileService.findById(id);
+        StudentProfile currStudent = studentProfileService.findById(id);
+        if(currStudent == null){
+            throw new CustomEntityNotFoundException("Student Profile not found - "+id);
+        }
+        return currStudent;
     }
 
     @DeleteMapping("/{id}")
     public void deleteStudentProfile(@PathVariable Long id) {
+        StudentProfile currStudent = studentProfileService.findById(id);
+        if(currStudent == null){
+            throw new CustomEntityNotFoundException("Student Profile not found - "+id);
+        }
         studentProfileService.deleteById(id);
     }
 
     // this is used to get a list of all faculties related to this student id
     @GetMapping("/listFaculty/{id}")
     public List<FacultyProfile> getFacultyList(@PathVariable Long id){
+        StudentProfile currStudent = studentProfileService.findById(id);
+        if(currStudent == null){
+            throw new CustomEntityNotFoundException("Student Profile not found - "+id);
+        }
         return studentProfileService.findFacultyForStudent(id);
     }
 }

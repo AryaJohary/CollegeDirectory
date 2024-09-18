@@ -1,6 +1,7 @@
 package com.aryajohary.collegedirectory.controllers;
 
 import com.aryajohary.collegedirectory.dto.FacultyProfileDTO;
+import com.aryajohary.collegedirectory.exception_handling.CustomEntityNotFoundException;
 import com.aryajohary.collegedirectory.schemas.Department;
 import com.aryajohary.collegedirectory.schemas.FacultyProfile;
 import com.aryajohary.collegedirectory.schemas.Role;
@@ -36,12 +37,13 @@ public class FacultyProfileController {
     // by first creating a DTO, and then setting up the Roles and Department values
     // here in this controller
     @PostMapping
-    public ResponseEntity<FacultyProfile> createFacultyProfile(@RequestBody FacultyProfileDTO facultyProfileDTO) {
+    public FacultyProfile createFacultyProfile(@RequestBody FacultyProfileDTO facultyProfileDTO) {
         // get the Department entity by departmentId
         Department department = departmentService.findById(facultyProfileDTO.getDepartmentId());
 
-        if (department == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // Handle if department is not found
+        if(department == null){
+            throw new CustomEntityNotFoundException(
+                    "Department not found with Id - "+facultyProfileDTO.getDepartmentId());
         }
 
         //  new facultyProfile entity
@@ -58,22 +60,31 @@ public class FacultyProfileController {
         facultyProfile.setDepartment(department);
 
         // save student profile
-        facultyProfileService.save(facultyProfile);
+        return facultyProfileService.save(facultyProfile);
 
-        return ResponseEntity.ok(facultyProfile);
     }
 
     @PutMapping("/{id}")
-    public FacultyProfile updateStudent(@PathVariable Long id, @RequestBody FacultyProfile facultyProfile){
+    public FacultyProfile updateStudent(@PathVariable Long id, @RequestBody FacultyProfileDTO facultyProfileDTO){
         FacultyProfile currFaculty = facultyProfileService.findById(id);
-        currFaculty.setDepartment(facultyProfile.getDepartment());
-        currFaculty.setEmail(facultyProfile.getEmail());
-        currFaculty.setName(facultyProfile.getName());
-        currFaculty.setPassword(facultyProfile.getPassword());
-        currFaculty.setPhone(facultyProfile.getPhone());
-        currFaculty.setPhoto(facultyProfile.getPhoto());
-        currFaculty.setUsername(facultyProfile.getUsername());
-        currFaculty.setOfficeHours(facultyProfile.getOfficeHours());
+        if(currFaculty == null){
+            throw new CustomEntityNotFoundException("Student Profile not found - "+id);
+        }
+
+        Department department = departmentService.findById(facultyProfileDTO.getDepartmentId());
+
+        if(department == null){
+            throw new CustomEntityNotFoundException(
+                    "Department not found with Id - "+facultyProfileDTO.getDepartmentId());
+        }
+        currFaculty.setDepartment(department);
+        currFaculty.setEmail(facultyProfileDTO.getEmail());
+        currFaculty.setName(facultyProfileDTO.getName());
+        currFaculty.setPassword(facultyProfileDTO.getPassword());
+        currFaculty.setPhone(facultyProfileDTO.getPhone());
+        currFaculty.setPhoto(facultyProfileDTO.getPhoto());
+        currFaculty.setUsername(facultyProfileDTO.getUsername());
+        currFaculty.setOfficeHours(facultyProfileDTO.getOfficeHours());
         return facultyProfileService.save(currFaculty);
     }
 
@@ -84,17 +95,29 @@ public class FacultyProfileController {
 
     @GetMapping("/{id}")
     public FacultyProfile getFacultyProfileById(@PathVariable Long id) {
-        return facultyProfileService.findById(id);
+        FacultyProfile currFaculty = facultyProfileService.findById(id);
+        if(currFaculty == null){
+            throw new CustomEntityNotFoundException("Faculty Profile not found - "+id);
+        }
+        return currFaculty;
     }
 
     @DeleteMapping("/{id}")
     public void deleteFacultyProfile(@PathVariable Long id) {
+        FacultyProfile currFaculty = facultyProfileService.findById(id);
+        if(currFaculty == null){
+            throw new CustomEntityNotFoundException("Faculty Profile not found - "+id);
+        }
         facultyProfileService.deleteById(id);
     }
 
     // this is used to get a list of all students related to this faculty id
     @GetMapping("/listStudents/{id}")
     public List<StudentProfile> listStudents(@PathVariable Long id){
+        FacultyProfile currFaculty = facultyProfileService.findById(id);
+        if(currFaculty == null){
+            throw new CustomEntityNotFoundException("Faculty Profile not found - "+id);
+        }
         return facultyProfileService.listStudents(id);
     }
 

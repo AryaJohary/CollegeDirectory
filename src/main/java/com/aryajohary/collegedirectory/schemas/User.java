@@ -18,8 +18,8 @@ public class User {
     private Long id;
 
     @NotNull(message = "Must have a username")
+    @Pattern(regexp = "^[a-zA-Z0-9._]+$", message = "Not a valid username")
     @Size(min = 6, max = 16, message = "Username length must be between 6 and 16")
-    @Pattern(regexp = "^[a-zA-Z0-9._]{6,16}$", message = "Not a valid username")
     private String username;
 
     @NotNull(message = "Must have a password")

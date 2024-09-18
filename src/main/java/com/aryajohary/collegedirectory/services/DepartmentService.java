@@ -36,4 +36,8 @@ public class DepartmentService {
     public void deleteById(Long id) {
         departmentRepository.deleteById(id);
     }
+
+    public long size(){
+        return departmentRepository.count();
+    }
 }

@@ -38,6 +38,9 @@ public class StudentProfileService {
         studentProfileRepository.deleteById(id);
     }
 
+    public long size(){
+        return studentProfileRepository.count();
+    }
     // i have created this custom method to do this
     // as mentioned in the main assignment file
 

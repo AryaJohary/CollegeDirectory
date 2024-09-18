@@ -36,4 +36,9 @@ public class EnrollmentService {
     public void deleteById(Long id) {
         enrollmentRepository.deleteById(id);
     }
+
+    public long size(){
+        return enrollmentRepository.count();
+    }
+
 }

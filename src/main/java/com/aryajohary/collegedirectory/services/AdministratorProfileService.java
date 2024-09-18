@@ -36,4 +36,8 @@ public class AdministratorProfileService {
     public void deleteById(Long id) {
         administratorProfileRepository.deleteById(id);
     }
+
+    public long size(){
+        return administratorProfileRepository.count();
+    }
 }

@@ -1,6 +1,7 @@
 package com.aryajohary.collegedirectory.controllers;
 
 import com.aryajohary.collegedirectory.dto.AdministratorProfileDTO;
+import com.aryajohary.collegedirectory.exception_handling.CustomEntityNotFoundException;
 import com.aryajohary.collegedirectory.schemas.AdministratorProfile;
 import com.aryajohary.collegedirectory.schemas.Department;
 import com.aryajohary.collegedirectory.schemas.Role;
@@ -36,12 +37,13 @@ public class AdministratorProfileController {
     // by first creating a DTO, and then setting up the Roles and Department values
     // here in this controller
     @PostMapping
-    public ResponseEntity<AdministratorProfile> createAdministratorProfile(@RequestBody AdministratorProfileDTO administratorProfileDTO) {
+    public AdministratorProfile createAdministratorProfile(@RequestBody AdministratorProfileDTO administratorProfileDTO) {
         // get Department entity by departmentId
         Department department = departmentService.findById(administratorProfileDTO.getDepartmentId());
 
-        if (department == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // Handle if department is not found
+        if(department == null){
+            throw new CustomEntityNotFoundException(
+                    "Department not found with Id - "+administratorProfileDTO.getDepartmentId());
         }
 
         //  new administratorProfile entity
@@ -58,21 +60,31 @@ public class AdministratorProfileController {
         administratorProfile.setDepartment(department);
 
         // save student profile
-        administratorProfileService.save(administratorProfile);
+        return administratorProfileService.save(administratorProfile);
 
-        return ResponseEntity.ok(administratorProfile);
     }
 
     @PutMapping("/{id}")
-    public AdministratorProfile updateStudent(@PathVariable Long id, @RequestBody StudentProfile administratorProfile){
+    public AdministratorProfile updateAdministrator(@PathVariable Long id, @RequestBody AdministratorProfileDTO administratorProfileDTO){
         AdministratorProfile currAdministrator = administratorProfileService.findById(id);
-        currAdministrator.setDepartment(administratorProfile.getDepartment());
-        currAdministrator.setEmail(administratorProfile.getEmail());
-        currAdministrator.setName(administratorProfile.getName());
-        currAdministrator.setPassword(administratorProfile.getPassword());
-        currAdministrator.setPhone(administratorProfile.getPhone());
-        currAdministrator.setPhoto(administratorProfile.getPhoto());
-        currAdministrator.setUsername(administratorProfile.getUsername());
+        if(currAdministrator == null){
+            throw new CustomEntityNotFoundException("Administrator Profile not found - "+id);
+        }
+
+        Department department = departmentService.findById(administratorProfileDTO.getDepartmentId());
+
+        if(department == null){
+            throw new CustomEntityNotFoundException(
+                    "Department not found with Id - "+administratorProfileDTO.getDepartmentId());
+        }
+
+        currAdministrator.setDepartment(department);
+        currAdministrator.setEmail(administratorProfileDTO.getEmail());
+        currAdministrator.setName(administratorProfileDTO.getName());
+        currAdministrator.setPassword(administratorProfileDTO.getPassword());
+        currAdministrator.setPhone(administratorProfileDTO.getPhone());
+        currAdministrator.setPhoto(administratorProfileDTO.getPhoto());
+        currAdministrator.setUsername(administratorProfileDTO.getUsername());
         return administratorProfileService.save(currAdministrator);
     }
 
@@ -83,11 +95,19 @@ public class AdministratorProfileController {
 
     @GetMapping("/{id}")
     public AdministratorProfile getAdministratorProfileById(@PathVariable Long id) {
-        return administratorProfileService.findById(id);
+        AdministratorProfile currAdmin = administratorProfileService.findById(id);
+        if(currAdmin == null){
+            throw new CustomEntityNotFoundException("Administrator Profile not found - "+id);
+        }
+        return currAdmin;
     }
 
     @DeleteMapping("/{id}")
     public void deleteAdministratorProfile(@PathVariable Long id) {
+        AdministratorProfile currAdmin = administratorProfileService.findById(id);
+        if(currAdmin == null){
+            throw new CustomEntityNotFoundException("Administrator Profile not found - "+id);
+        }
         administratorProfileService.deleteById(id);
     }
 }
