@@ -4,11 +4,13 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.server.MethodNotAllowedException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,32 +18,18 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler extends RuntimeException{
 
-    // add exception handler code here
+    // exception handler for invalid json body when using POST method
     @ExceptionHandler
     public ResponseEntity<GlobalErrorResponse> handleInvalidJSON(HttpMessageNotReadableException exc){
         GlobalErrorResponse errorResponse = new GlobalErrorResponse();
         errorResponse.setStatus(HttpStatus.BAD_REQUEST);
-        errorResponse.setMessage("JSON Syntax not correct. See \"/syntax path\" for proper syntax");
+        errorResponse.setMessage("JSON Syntax not correct. See \"/syntax\" path for proper syntax");
         errorResponse.setTimestamp(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<GlobalErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
 
-        GlobalErrorResponse errorResponse = new GlobalErrorResponse();
-        errorResponse.setStatus(HttpStatus.BAD_REQUEST);
-        errorResponse.setMessage(errors.toString());
-        errorResponse.setTimestamp(LocalDateTime.now());
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-
+    // exception handler for constraint violations while giving values in json body
     @ExceptionHandler
     public ResponseEntity<GlobalErrorResponse> handleConstraintViolationExceptions(ConstraintViolationException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -56,7 +44,26 @@ public class GlobalExceptionHandler extends RuntimeException{
         errorResponse.setMessage(errors.toString());
         errorResponse.setTimestamp(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
 
+    // when url is wrong, i always get this error. so i handled i here.
+    @ExceptionHandler
+    public ResponseEntity<GlobalErrorResponse> handleMethodNotAllowedExceptions(HttpRequestMethodNotSupportedException exc){
+        GlobalErrorResponse errorResponse = new GlobalErrorResponse();
+        errorResponse.setMessage("Check URL. Method not allowed here");
+        errorResponse.setStatus(HttpStatus.METHOD_NOT_ALLOWED);
+        errorResponse.setTimestamp(LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse,HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
+    // this one for handling URLs which have not been defined.
+    @ExceptionHandler
+    public ResponseEntity<GlobalErrorResponse> handleMethodArguementTypeMismatch(MethodArgumentTypeMismatchException exc){
+        GlobalErrorResponse errorResponse = new GlobalErrorResponse();
+        errorResponse.setMessage("No such URL is present. Check README for URL list");
+        errorResponse.setStatus(HttpStatus.BAD_REQUEST);
+        errorResponse.setTimestamp(LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }
 
 }

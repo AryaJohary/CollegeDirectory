@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 
 public class GlobalErrorResponse {
 
+    // i have created this generic error response and will output it
+    // instead of traditional bloated error response we get
+
     private HttpStatus status;
     private String message;
     private LocalDateTime timestamp;

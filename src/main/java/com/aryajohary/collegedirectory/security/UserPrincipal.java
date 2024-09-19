@@ -27,6 +27,9 @@ public class UserPrincipal implements UserDetails {
     }
 
 
+    public User getUser() {
+        return this.user;
+    }
     // getting the username password as is from the user
 
     @Override
