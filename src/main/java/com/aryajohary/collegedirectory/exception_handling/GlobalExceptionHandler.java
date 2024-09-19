@@ -66,4 +66,14 @@ public class GlobalExceptionHandler extends RuntimeException{
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }
 
+    // exception handler for situations when some required Id couldn't be found
+    @ExceptionHandler
+    public ResponseEntity<GlobalErrorResponse> handleEntityNotFoundException(CustomEntityNotFoundException exc){
+        GlobalErrorResponse errorResponse = new GlobalErrorResponse();
+        errorResponse.setMessage(exc.getMessage());
+        errorResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        errorResponse.setTimestamp(LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
