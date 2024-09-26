@@ -5,12 +5,9 @@ import com.aryajohary.collegedirectory.exception_handling.CustomEntityNotFoundEx
 import com.aryajohary.collegedirectory.schemas.AdministratorProfile;
 import com.aryajohary.collegedirectory.schemas.Department;
 import com.aryajohary.collegedirectory.schemas.Role;
-import com.aryajohary.collegedirectory.schemas.StudentProfile;
 import com.aryajohary.collegedirectory.services.AdministratorProfileService;
 import com.aryajohary.collegedirectory.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -11,12 +11,8 @@ import java.util.List;
 @Service
 public class StudentProfileService {
 
-    private StudentProfileRepository studentProfileRepository;
-
     @Autowired
-    public StudentProfileService(StudentProfileRepository studentProfileRepository) {
-        this.studentProfileRepository = studentProfileRepository;
-    }
+    private StudentProfileRepository studentProfileRepository;
 
     public StudentProfile save(StudentProfile studentProfile) {
         return studentProfileRepository.save(studentProfile);

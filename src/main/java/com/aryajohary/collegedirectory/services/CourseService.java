@@ -10,12 +10,8 @@ import java.util.List;
 @Service
 public class CourseService {
 
-    private CourseRepository courseRepository;
-
     @Autowired
-    public CourseService(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
+    private CourseRepository courseRepository;
 
     public Course save(Course course) {
         return courseRepository.save(course);

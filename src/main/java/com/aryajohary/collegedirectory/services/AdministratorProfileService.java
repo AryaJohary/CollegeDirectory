@@ -10,12 +10,8 @@ import java.util.List;
 @Service
 public class AdministratorProfileService {
 
-    private AdministratorProfileRepository administratorProfileRepository;
-
     @Autowired
-    public AdministratorProfileService(AdministratorProfileRepository administratorProfileRepository) {
-        this.administratorProfileRepository = administratorProfileRepository;
-    }
+    private AdministratorProfileRepository administratorProfileRepository;
 
     public AdministratorProfile save(AdministratorProfile administratorProfile) {
         return administratorProfileRepository.save(administratorProfile);

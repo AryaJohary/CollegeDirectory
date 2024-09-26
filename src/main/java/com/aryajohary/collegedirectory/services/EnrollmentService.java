@@ -10,12 +10,8 @@ import java.util.List;
 @Service
 public class EnrollmentService {
 
-    private EnrollmentRepository enrollmentRepository;
-
     @Autowired
-    public EnrollmentService(EnrollmentRepository enrollmentRepository) {
-        this.enrollmentRepository = enrollmentRepository;
-    }
+    private EnrollmentRepository enrollmentRepository;
 
     public Enrollment save(Enrollment enrollment) {
         return enrollmentRepository.save(enrollment);

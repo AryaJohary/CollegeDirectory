@@ -11,12 +11,8 @@ import java.util.List;
 @Service
 public class FacultyProfileService {
 
-    private FacultyProfileRepository facultyProfileRepository;
-
     @Autowired
-    public FacultyProfileService(FacultyProfileRepository facultyProfileRepository) {
-        this.facultyProfileRepository = facultyProfileRepository;
-    }
+    private FacultyProfileRepository facultyProfileRepository;
 
     public FacultyProfile save(FacultyProfile facultyProfile) {
         return facultyProfileRepository.save(facultyProfile);

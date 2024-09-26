@@ -10,12 +10,8 @@ import java.util.List;
 @Service
 public class DepartmentService {
 
-    private DepartmentRepository departmentRepository;
-
     @Autowired
-    public DepartmentService(DepartmentRepository departmentRepository) {
-        this.departmentRepository = departmentRepository;
-    }
+    private DepartmentRepository departmentRepository;
 
     public Department save(Department department) {
         return departmentRepository.save(department);
