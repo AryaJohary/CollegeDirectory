@@ -35,6 +35,7 @@ public class User {
     @NotNull(message = "Must have name")
     private String name;
 
+    @Column(unique = true)
     @NotNull(message = "Must have an email")
     private String email;
 

@@ -16,6 +16,10 @@ public interface StudentProfileRepository extends JpaRepository<StudentProfile, 
     // although i needed to show only a limited portion of the FacultyProfile,
     // but due to time constraints, I am showing the full profile for now
 
+    // also, in jpql, we only need the class names and variables to create a query
+    // we don't need to specify the table name and other column names because
+    // jpql will handle it internally. naming the class name only is the correct behaviour here
+
     @Query("SELECT f " +
             "FROM Enrollment e " +
             "JOIN e.studentProfile s " +
