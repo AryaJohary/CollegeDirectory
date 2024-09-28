@@ -2,8 +2,7 @@
 
 ## Overview
 
-The College Directory Application is designed to manage student, faculty, and administrator profiles within a college. It includes role-based access control and provides CRUD operations for different user roles. The application utilizes Spring Boot with Hibernate JPA for data persistence and Spring Security for securing endpoints.
-
+The College Directory Application is designed to manage student, faculty, and administrator profiles within a college, featuring role-based access control and CRUD operations for different user roles. Built with Spring Boot and Hibernate JPA for data persistence and secured using Spring Security, the application ensures a robust backend architecture. It also incorporates custom exception handling across all API endpoints to provide detailed error messages and efficient error management. To maintain data integrity, the application enforces various validations, including length constraints, not-null checks, and foreign key validations.
 ## Technologies Used
 
 - **Backend**: Spring Boot, Hibernate JPA
