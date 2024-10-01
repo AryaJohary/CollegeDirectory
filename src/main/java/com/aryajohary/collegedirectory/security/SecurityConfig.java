@@ -29,6 +29,9 @@ public class SecurityConfig {
                         .requestMatchers("/studentProfiles/**").hasAnyAuthority(String.valueOf(Role.Student), String.valueOf(Role.Administrator))
                         .requestMatchers("/facultyprofiles/**").hasAnyAuthority(String.valueOf(Role.Faculty_Member), String.valueOf(Role.Administrator))
                         .requestMatchers("/administratorProfiles/**").hasAuthority(String.valueOf(Role.Administrator))
+                        .requestMatchers("/courses/**").permitAll()
+                        .requestMatchers("/users/**").hasAuthority(String.valueOf(Role.Administrator))
+                        .requestMatchers("/departments/**").permitAll()
                         .anyRequest().authenticated()
                         )
                         .formLogin(form -> form
