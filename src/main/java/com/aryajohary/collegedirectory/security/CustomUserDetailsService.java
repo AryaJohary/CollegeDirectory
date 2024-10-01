@@ -1,7 +1,7 @@
 package com.aryajohary.collegedirectory.security;
 
+import com.aryajohary.collegedirectory.repos.UserRepo;
 import com.aryajohary.collegedirectory.schemas.User;
-import com.aryajohary.collegedirectory.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserRepo userRepo;
 
 
     // since i am using custom tables, i need to specify the
@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUserName(username);
+        User user = userRepo.findByUsername(username);
         if(user==null){
             System.out.println("User not found");
             throw new UsernameNotFoundException("User not found");
