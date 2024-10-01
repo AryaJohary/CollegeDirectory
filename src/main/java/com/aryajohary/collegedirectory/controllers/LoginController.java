@@ -52,13 +52,13 @@ public class LoginController {
                 // Redirect based on the role
                 System.out.println("Role matched");
                 switch (permittedRole){
-                    case Role.STUDENT -> {
+                    case Role.Student -> {
                         return "redirect:/studentProfiles";
                     }
-                    case Role.FACULTY_MEMBER -> {
+                    case Role.Faculty_Member -> {
                         return "redirect:/facultyProfiles";
                     }
-                    case Role.ADMINISTRATOR -> {
+                    case Role.Administrator -> {
                         return "redirect:/adminProfiles";
                     }
                 }

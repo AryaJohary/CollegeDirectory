@@ -1,4 +1,4 @@
-package com.aryajohary.collegedirectory.exception_handling;
+package com.aryajohary.collegedirectory.exceptions;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler extends RuntimeException{
         GlobalErrorResponse errorResponse = new GlobalErrorResponse();
         errorResponse.setStatus(HttpStatus.BAD_REQUEST);
         errorResponse.setMessage("JSON Syntax not correct. See \"/syntax\" path for proper syntax");
-        errorResponse.setTimestamp(LocalDateTime.now());
+        errorResponse.setTimeStamp(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }
 
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler extends RuntimeException{
         GlobalErrorResponse errorResponse = new GlobalErrorResponse();
         errorResponse.setStatus(HttpStatus.BAD_REQUEST);
         errorResponse.setMessage(errors.toString());
-        errorResponse.setTimestamp(LocalDateTime.now());
+        errorResponse.setTimeStamp(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler extends RuntimeException{
         GlobalErrorResponse errorResponse = new GlobalErrorResponse();
         errorResponse.setMessage("Check URL. Method not allowed here");
         errorResponse.setStatus(HttpStatus.METHOD_NOT_ALLOWED);
-        errorResponse.setTimestamp(LocalDateTime.now());
+        errorResponse.setTimeStamp(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse,HttpStatus.METHOD_NOT_ALLOWED);
     }
 
@@ -60,7 +60,7 @@ public class GlobalExceptionHandler extends RuntimeException{
         GlobalErrorResponse errorResponse = new GlobalErrorResponse();
         errorResponse.setMessage("No such URL is present. Check README for URL list");
         errorResponse.setStatus(HttpStatus.BAD_REQUEST);
-        errorResponse.setTimestamp(LocalDateTime.now());
+        errorResponse.setTimeStamp(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }
 
@@ -70,7 +70,7 @@ public class GlobalExceptionHandler extends RuntimeException{
         GlobalErrorResponse errorResponse = new GlobalErrorResponse();
         errorResponse.setMessage(exc.getMessage());
         errorResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        errorResponse.setTimestamp(LocalDateTime.now());
+        errorResponse.setTimeStamp(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

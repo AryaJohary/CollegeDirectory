@@ -26,9 +26,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 configurer -> configurer
-                        .requestMatchers("/studentProfiles/**").hasAnyAuthority(String.valueOf(Role.STUDENT), String.valueOf(Role.ADMINISTRATOR))
-                        .requestMatchers("/facultyprofiles/**").hasAnyAuthority(String.valueOf(Role.FACULTY_MEMBER), String.valueOf(Role.ADMINISTRATOR))
-                        .requestMatchers("/administratorProfiles/**").hasAuthority(String.valueOf(Role.ADMINISTRATOR))
+                        .requestMatchers("/studentProfiles/**").hasAnyAuthority(String.valueOf(Role.Student), String.valueOf(Role.Administrator))
+                        .requestMatchers("/facultyprofiles/**").hasAnyAuthority(String.valueOf(Role.Faculty_Member), String.valueOf(Role.Administrator))
+                        .requestMatchers("/administratorProfiles/**").hasAuthority(String.valueOf(Role.Administrator))
                         .anyRequest().authenticated()
                         )
                         .formLogin(form -> form
