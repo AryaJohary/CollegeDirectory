@@ -1,5 +1,6 @@
 package com.aryajohary.collegedirectory.security;
 
+
 import com.aryajohary.collegedirectory.schemas.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,29 +9,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class UserPrincipal implements UserDetails {
-
-    // i will use this user variable to later access the role so that I can
-    // determine its access level
+public class UserPrinciple implements UserDetails{
 
     private User user;
 
-    public UserPrincipal(User user) {
+    public UserPrinciple(User user) {
         this.user = user;
+        System.out.println("User principle called");
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String authority = String.valueOf(user.getRole());
-        System.out.println("Granted Authority: " + authority);
+        String authority = user.getRole().toString();
+        System.out.println("Granted Authority: "+authority);
         return Collections.singleton(new SimpleGrantedAuthority(authority));
     }
-
-
-    public User getUser() {
-        return this.user;
-    }
-    // getting the username password as is from the user
 
     @Override
     public String getPassword() {
@@ -42,16 +35,8 @@ public class UserPrincipal implements UserDetails {
         return user.getUsername();
     }
 
-    // and since we don't have rest fields in the table itself
-    // i will manually mark all the required boolean values true
-
     @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
+    public boolean isAccountNonExpired() {
         return true;
     }
 
@@ -61,9 +46,12 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
+    public boolean isCredentialsNonExpired() {
         return true;
     }
 
-
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

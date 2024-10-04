@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -15,18 +16,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepo userRepo;
 
 
-    // since i am using custom tables, i need to specify the
-    // user details here. I have queried the database using the userService and
-    // if username is present in database, I have used the UserPrincipal
-    // to later set the username and password from the user and also the remaining fields
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
+        System.out.println("CustomUserDetailsService called for username: " + username);
         if(user==null){
-            System.out.println("User not found");
-            throw new UsernameNotFoundException("User not found");
+            System.out.println("username not found");
+            throw new UsernameNotFoundException("Username "+username+" not found");
         }
-        return new UserPrincipal(user);
+        return new UserPrinciple(user);
     }
 }
