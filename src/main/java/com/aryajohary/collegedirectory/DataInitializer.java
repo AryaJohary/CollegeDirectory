@@ -2,6 +2,7 @@ package com.aryajohary.collegedirectory;
 
 import com.aryajohary.collegedirectory.repos.*;
 import com.aryajohary.collegedirectory.schemas.*;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -29,11 +30,6 @@ public class DataInitializer {
 
     @Autowired
     private EnrollmentRepo enrollmentRepo;
-
-    @Bean
-    public CommandLineRunner commandLineRunner() {
-        return runner -> createComplexCollegeRecords();
-    }
 
     private List<Department> createDepartments() {
         Department csDepartment = new Department("Computer Science", "Department of Computer Science");
@@ -164,6 +160,7 @@ public class DataInitializer {
     }
 
     // main method to create the complex college records
+    @PostConstruct
     private void createComplexCollegeRecords() {
         List<Department> departments = createDepartments();
         departmentRepo.saveAll(departments);
